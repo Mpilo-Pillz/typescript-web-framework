@@ -1,0 +1,10 @@
+Object.assign(this.data, update);
+
+take all the properties and values in "update", copy and paste them overwriting thr corresponding values and properties in this.data
+
+interface UserProps {
+    name?: string;
+    age?: number
+}
+
+the question mark makes the property optional just like in swift
