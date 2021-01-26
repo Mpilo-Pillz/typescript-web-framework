@@ -1,0 +1,10 @@
+type Callback = ()=> {} // a function that returns and object
+type Callback = ()=> void a function that does not return anything
+type alias is an alternative to interface, he one above is for a function
+
+
+on(eventName: string, callback: Callback): void {
+        // this.events[eventName] // Callback[] or undefined
+        const handlers = this.events[eventName] || []; //handlers is guarantted to be an array
+    what the above means is its either goign to have an event (defined) or be undefined. if its undefined return an empty array instead
+    }
