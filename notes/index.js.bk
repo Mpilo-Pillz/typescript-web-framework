@@ -1,0 +1,29 @@
+import { User } from './models/User';
+
+const user = new User({name: 'Mapee', age: 20});
+
+user.on('change', () => {
+    console.log("changed clicked");
+    
+});
+
+user.on('click', () => {
+console.log("click clicked");
+
+});
+
+user.trigger('change');
+
+
+//////////////////////////////
+import { User } from './models/User';
+
+const user = new User({id: 1});
+
+user.fetch();
+
+//a hack to deal with the delay in the fetching of a user wait 4 seconds so it resolves then fetch the user
+setTimeout(() => {
+    console.log(user);
+}, 4000)
+

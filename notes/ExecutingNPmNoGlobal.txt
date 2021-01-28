@@ -1,0 +1,3 @@
+npx qnm json-server -w db.json    queies your node modules for the package
+
+$(npm bin)/json-server -w db.json    executes the file
