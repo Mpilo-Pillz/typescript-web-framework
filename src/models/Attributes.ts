@@ -2,9 +2,11 @@ import { UserProps } from "./User";
 export class Attributes<Type> {
   constructor(private data: Type) {}
 
-  get<KeyOfObject extends keyof Type>(key: KeyOfObject): Type[KeyOfObject] {
+  get = <KeyOfObject extends keyof Type>(
+    key: KeyOfObject
+  ): Type[KeyOfObject] => {
     return this.data[key];
-  }
+  };
 
   set(update: Type): void {
     Object.assign(this.data, update);

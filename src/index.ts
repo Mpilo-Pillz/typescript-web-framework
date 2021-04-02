@@ -1,12 +1,25 @@
-import { User } from './models/User';
+import { User } from "./models/User";
 
-const user = new User({ name: 'new record', age: 12});
+const user = new User({ id: 1 });
 
-user.events.on('change', () => {
-    console.log('change!');
+// console.log(user.get("name"));
+
+user.on("change", () => {
+  console.log(user);
+
+  //   console.log("user was changed, we probably need to update some html");
 });
-user.events.trigger('change')
 
-user.save();
+user.fetch();
 
+// user.set({ name: "new name" });
 
+// debugger;
+// user.trigger("change"); //manual trigger
+
+// user.events.on('change', () => {
+//     console.log('change!');
+// });
+// user.events.trigger('change')
+
+// user.save();
