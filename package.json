@@ -7,7 +7,7 @@
     "json-server": "^0.16.3"
   },
   "scripts": {
-    "start:db": "$(npm bin)/json-server -w db.json",
+    "start:db": "$(npm bin)/json-server -w db.json --port 3004",
     "start:parcel": "parcel index.html"
   }
 }

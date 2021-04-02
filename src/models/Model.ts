@@ -1,24 +1,28 @@
-import { Eventing } from "./Eventing";
-import { Sync } from "./Sync";
-import { Attributes } from "./Attributes";
-import { AxiosResponse } from "axios";
+import { AxiosPromise, AxiosResponse } from "axios";
 
-export interface UserProps {
-  id?: number;
-  name?: string;
-  age?: number;
+interface ModelAttributes<T> {
+  set(value: T): void;
+  getAll(): T;
+  get<K extends keyof T>(key: K): T[K];
 }
 
-const rootUrl = "http://localhost:3004/users";
+interface Sync<T> {
+  fetch(id: number): AxiosPromise;
+  save(data: T): AxiosPromise;
+}
+// Callback = () => void
 
-export class User {
-  public events: Eventing = new Eventing();
-  public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl);
-  public attributes: Attributes<UserProps>;
+interface Events {
+  on(eventName: string, callback: () => void): void;
+  trigger(eventName: string): void;
+}
 
-  constructor(attrs: UserProps) {
-    this.attributes = new Attributes<UserProps>(attrs);
-  }
+export class Model<T> {
+  constructor(
+    private attributes: ModelAttributes<T>,
+    private events: Events,
+    private sync: Sync<T>
+  ) {}
 
   get on() {
     return this.events.on;
@@ -32,7 +36,7 @@ export class User {
     return this.attributes.get;
   }
 
-  set(update: UserProps): void {
+  set(update: T): void {
     this.attributes.set(update);
     this.events.trigger("change");
     // this.trigger("change");
@@ -64,8 +68,4 @@ export class User {
         this.trigger("error");
       });
   }
-
-  //   on(eventName: string, callback: Callback): void {
-  //     this.events.on(eventName, callback);
-  //   }
 }
