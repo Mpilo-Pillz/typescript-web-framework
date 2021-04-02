@@ -14,6 +14,11 @@
       "name": "new record",
       "age": 12,
       "id": 3
+    },
+    {
+      "name": "debug data",
+      "age": 12,
+      "id": 4
     }
   ]
 }
