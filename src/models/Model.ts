@@ -17,21 +17,27 @@ interface Events {
   trigger(eventName: string): void;
 }
 
-export class Model<T> {
+interface HasId {
+  id?: number;
+}
+
+export class Model<T extends HasId> {
   constructor(
     private attributes: ModelAttributes<T>,
     private events: Events,
     private sync: Sync<T>
   ) {}
 
+  //   on = this.events.on (this is a shor cut to the below)
   get on() {
     return this.events.on;
   }
 
+  //   trigger = this.events.trigger
   get trigger() {
     return this.events.trigger;
   }
-
+  //   get = this.attributes.get
   get get() {
     return this.attributes.get;
   }
