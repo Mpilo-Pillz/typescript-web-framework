@@ -1,25 +1,8 @@
-import { Collection } from "./models/Collection";
-import { User, UserProps } from "./models/User";
+import { UserForm } from "./views/UserForm";
+import { User } from "./models/User";
 
-const collection = new Collection<User, UserProps>(
-  "http://localhost:3004/users",
-  (json: UserProps) => User.buildUser(json)
-);
-collection.on("change", () => {
-  console.log(collection);
-});
-collection.fetch();
+const user = User.buildUser({ name: "NAME", age: 20 });
 
-// import axios, { AxiosResponse } from "axios";
+const userForm = new UserForm(document.getElementById("root"), user);
 
-// axios.get("http://localhost:3004/users").then((response) => {
-//   console.log(response.data);
-// });
-// import { User } from "./models/User";
-
-// const user = User.buildUser({ id: 1 });
-// user.on("change", () => {
-//   console.log(user);
-// });
-
-// user.fetch();
+userForm.render();
